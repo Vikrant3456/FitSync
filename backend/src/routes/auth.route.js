@@ -15,8 +15,4 @@ router.post("/logout", logout);
 
 router.get('/profile', protectRoute, getProfile);
 
-
-
-
-
 export default router;

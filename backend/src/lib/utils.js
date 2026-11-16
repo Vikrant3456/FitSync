@@ -5,21 +5,15 @@ export const generateToken = (userId, res) => {
         expiresIn: "7d",
     });
 
-    // res.cookie("jwt", token, {
-    //     maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days
-    //     httpOnly: true,  // Makes the cookie accessible only by the server
-    //     secure: process.env.NODE_ENV !== "development",  // In development, cookies are not sent over https
-    //     sameSite:"None",
-    // });
+    // Development → HTTP, Production → HTTPS
+    const isProd = process.env.NODE_ENV !== "development";
 
-    res.cookie("jwt", token, { // (Your cookie name might be 'jwt' or 'token')
-    maxAge: 7 * 24 * 60 * 60 * 1000, 
-    httpOnly: true,
-    secure: true,       // Force true to bypass Pinggy HTTPS restrictions
-    sameSite: "none",   // Allow tunnel routing
-  });
+    res.cookie("jwt", token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,   // 7 days
+        httpOnly: true,
+        secure: isProd,                     // true only on HTTPS
+        sameSite: isProd ? "None" : "Lax",  // cross‑site only on HTTPS
+    });
 
     return token;
 };
-
-
