@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
   // Development: point to the backend running on the same laptop
   baseURL:
     import.meta.env.MODE === 'development'
-      ? import.meta.env.VITE_BACKEND_URL   // resolves to http://localhost:5000/api
+      ? import.meta.env.BACKEND_URL   // resolves to http://localhost:5000/api
       : '/api',
   withCredentials: true,
 });
