@@ -12,9 +12,11 @@ const __dirname = path.resolve();
 const app = express();
 
 // Allow any origin – safe for local development
-app.use(cors({ origin: true, credentials: true }));
-
-app.use(express.json());
+app.use(cors({ 
+   origin: process.env.FRONTEND_URL, credentials: true
+  })); 
+  
+  app.use(express.json());
 app.use(cookieParser());
 
 app.use('/ping', (req, res, next) => {
