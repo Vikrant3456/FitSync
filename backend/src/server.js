@@ -17,6 +17,10 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use('/ping', (req, res, next) => {
+  res.json({ message: 'Pong!' });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/activity', activityRoutes);
 app.use('/api/analytics', analyticsRoutes);
